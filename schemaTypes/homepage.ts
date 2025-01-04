@@ -1,4 +1,4 @@
-import { defineArrayMember, defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity';
 
 export const homepage = defineType({
   name: 'homepage',
@@ -124,5 +124,37 @@ export const homepage = defineType({
         },
       ],
     }),
+
+    // Ajout de la section Reviews
+    defineField({
+      name: 'reviews',
+      type: 'object',
+      title: 'Reviews',
+      fields: [
+        { name: 'title', type: 'string', title: 'Titre des Reviews' },
+        {
+          name: 'cards',
+          type: 'array',
+          title: 'Avis Clients',
+          of: [
+            defineArrayMember({
+              type: 'object',
+              fields: [
+                { name: 'comment', type: 'text', title: 'Commentaire' },
+                { name: 'name', type: 'string', title: 'Nom de la personne' },
+                {
+                  name: 'profilePicture',
+                  type: 'image',
+                  title: 'Photo de profil',
+                  options: {
+                    hotspot: true, // Permet de recadrer l'image
+                  },
+                },
+              ],
+            }),
+          ],
+        },
+      ],
+    }),
   ],
-})
+});
